@@ -1,0 +1,95 @@
+﻿<Window x:Class="HistoryCreator.Views.Dialog.NewProjectView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HistoryCreator.Views.Dialog"
+        xmlns:enums="clr-namespace:HistoryCreator.Models.Data.Enum"
+        xmlns:converters="clr-namespace:HistoryCreator.Ressources.Core.Converters"
+        xmlns:MzComponent="clr-namespace:HistoryCreator.Ressources.UI.Components"
+        mc:Ignorable="d"
+        Title="{Binding Header}" 
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        MaxWidth="406"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="ProjectTypeEnum"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:ProjectType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="TypeOfStorageEnum"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:StorageType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <converters:RemoveDefaultValueEnumConverter x:Key="RemoveDefaultValueEnumConverter" />
+    </Window.Resources>
+    <StackPanel Margin="15">
+        <StackPanel.Resources>
+            <ResourceDictionary Source="..\..\Ressources\UI\Style\ComponentsStyleDictionary.xaml"/>
+        </StackPanel.Resources>
+
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="Nom du projet"/>
+            <TextBox Grid.Row="1"
+                     Text="{Binding CurrentProject.Name, Mode=TwoWay}"
+                     Width="350" />
+        </Grid>
+
+        <MzComponent:MzInputFilePath LabelText="Chemin du projet"
+                                     Path="{Binding CurrentProject.Path, Mode=TwoWay}"
+                                     DefaultPath="{Binding DefaultProjectPath}" 
+                                     Margin="5" />
+
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="Type de projet" />
+            <ComboBox Grid.Row="1"
+                      ItemsSource="{Binding Source={StaticResource ProjectTypeEnum}, Converter={StaticResource RemoveDefaultValueEnumConverter}}" 
+                      SelectedItem="{Binding CurrentProject.TypeOfProject, Mode=TwoWay}" />
+        </Grid>
+
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="Type de stockage" />
+            <ComboBox Grid.Row="1"
+                      ItemsSource="{Binding Source={StaticResource TypeOfStorageEnum}, Converter={StaticResource RemoveDefaultValueEnumConverter}}"
+                      SelectedItem="{Binding CurrentProject.TypeOfStorage, Mode=TwoWay}" />
+        </Grid>
+
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" 
+                    Content="Annuler" 
+                    Command="{Binding CancelCommand}"
+                    Margin="5 0"/>
+            <Button Grid.Column="1"
+                    Content="Créer" 
+                    Command="{Binding ValidateCommand}"
+                    Margin="5 0" />
+        </Grid>
+    </StackPanel>
+</Window>

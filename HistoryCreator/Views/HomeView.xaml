@@ -1,0 +1,103 @@
+﻿<Window x:Class="HistoryCreator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HistoryCreator"
+        xmlns:converter="clr-namespace:HistoryCreator.Ressources.Core.Converters" xmlns:mzLayout="clr-namespace:HistoryCreator.Ressources.UI.Layout"
+        mc:Ignorable="d"
+        Title="History Creator" 
+        ResizeMode="CanResize"
+        WindowState="Maximized"
+        Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <converter:DebugDummyConverter x:Key="DebugDummyConverter" />
+                </ResourceDictionary>
+                <ResourceDictionary Source="..\Ressources\UI\Style\ImagesDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Ribbon x:Name="RibbonApplication"
+                ShowQuickAccessToolBarOnTop="False"
+                Grid.Row="0">
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu>
+                    <RibbonApplicationMenu.SmallImageSource>
+                        <DrawingImage>
+                            <DrawingImage.Drawing>
+                                <GeometryDrawing>
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry Rect="0,0,20,20" />
+                                    </GeometryDrawing.Geometry>
+                                    <GeometryDrawing.Brush>
+                                        <VisualBrush Stretch="Uniform">
+                                            <VisualBrush.Visual>
+                                                <TextBlock Text="File" FontSize="16" Foreground="White" />
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </GeometryDrawing.Brush>
+                                </GeometryDrawing>
+                            </DrawingImage.Drawing>
+                        </DrawingImage>
+                    </RibbonApplicationMenu.SmallImageSource>
+                    <RibbonApplicationMenuItem Header="Nouveau"
+                                               Command="{Binding NewProjectCommand}" />
+                    <RibbonApplicationMenuItem Header="Ouvrir" 
+                                               Command="{Binding OpenProjectCommand}" />
+                    <RibbonApplicationMenuItem Header="Sauvegarder" />
+                    <RibbonSeparator/>
+                    <RibbonApplicationMenuItem Header="Paramètres" />
+                    <RibbonSeparator/>
+                    <RibbonApplicationMenuItem Header="A Propos" />
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+
+            <!-- TODO : Mettre en place les actions rapide -->
+            <RibbonTab IsSelected="True"
+                       Header="Edition">
+                <RibbonGroup>
+                    <RibbonMenuButton Width="Auto"
+                                      Height="Auto"
+                                      LargeImageSource="{StaticResource Character_Icon}"
+                                      VerticalAlignment="Stretch"
+                                      Label="Personnages">
+                        <RibbonMenuButton.Items>
+                            <RibbonMenuItem Header="Création"
+                                            Command="{Binding CreateCharacterCommand}"/>
+                        </RibbonMenuButton.Items>
+                    </RibbonMenuButton>
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+
+        <mzLayout:MzTabControl Grid.Row="1"
+                               ItemsSource="{Binding OpenViewCollection}"/>
+
+        <Border Grid.Row="2"
+                Margin="5"
+                BorderBrush="Black"
+                BorderThickness="1">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Grid.Column="0"
+                           TextAlignment="Right"
+                           Text="Projet charger : " 
+                           FontSize="14" />
+                <TextBlock Grid.Column="1"
+                           TextAlignment="Left"
+                           Text="{Binding CurrentProject.Name, Mode=TwoWay}" 
+                           FontSize="14" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
