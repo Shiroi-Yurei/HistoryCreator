@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -31,16 +30,6 @@ namespace HistoryCreator.Ressources.UI.Layout
             {
                 control.ItemsSource = (IEnumerable)e.NewValue;
                 control.RootControl.ItemsSource = (IEnumerable)e.NewValue;
-            }
-        }
-
-        private void RemoveButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button &&
-                button.CommandParameter is TabItem control &&
-                ItemsSource is ObservableCollection<TabItem> source)
-            {
-                source.Remove(control);
             }
         }
     }

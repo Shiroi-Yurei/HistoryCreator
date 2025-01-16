@@ -12,9 +12,4 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Ressources\UI\Layout\Interfaces\" />
-    <Folder Include="Views\HomeParts\" />
-  </ItemGroup>
-
 </Project>

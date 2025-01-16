@@ -12,24 +12,25 @@
             <ResourceDictionary>
                 <converter:DebugDummyConverter x:Key="DebugDummyConverter" />
 
-                <Style TargetType="TabItem">
+                <Style TargetType="local:MzPaneView">
                     <Setter Property="HeaderTemplate">
                         <Setter.Value>
-                            <DataTemplate DataType="TabItem">
+                            <DataTemplate DataType="local:MzPaneView">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding .}"
                                                Background="Transparent"
                                                Foreground="Black"
                                                VerticalAlignment="Center" />
-                                    <Button Margin="5 0 0 0" 
+                                    <Button Margin="5 0 0 0"
                                             Content="X"
                                             Background="Transparent"
-                                            CommandParameter="{Binding ., RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}"
-                                            Click="RemoveButton_Click"
+                                            Visibility="{Binding IsStatic, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}, Converter={converter:InvertBoolToVisibilityConverter}}"
+                                            Command="{Binding CloseViewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}"
                                             BorderBrush="Transparent" />
                                 </StackPanel>
                             </DataTemplate>
                         </Setter.Value>
+
                     </Setter>
                 </Style>
                 

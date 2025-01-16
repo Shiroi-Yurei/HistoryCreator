@@ -1,6 +1,9 @@
-﻿using HistoryCreator.ViewModel;
-using System.Collections.ObjectModel;
+﻿using HistoryCreator.Ressources.UI.Layout;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,18 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HistoryCreator
+namespace HistoryCreator.Views.HomeParts
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour TestView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HomeView
     {
-        public MainWindow()
+        public HomeView()
         {
             InitializeComponent();
-
-            DataContext = new HomeViewModel();
         }
     }
 }

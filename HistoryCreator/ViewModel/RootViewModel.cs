@@ -4,15 +4,18 @@ using HistoryCreator.Models.Data.Project;
 using HistoryCreator.Ressources;
 using HistoryCreator.Ressources.Core;
 using HistoryCreator.Ressources.UI;
+using HistoryCreator.Ressources.UI.Layout;
+using HistoryCreator.Ressources.UI.Layout.Interfaces;
+using HistoryCreator.Ressources.UI.Manager.View;
 using HistoryCreator.Views.Dialog;
+using HistoryCreator.Views.HomeParts;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows.Controls;
 
 namespace HistoryCreator.ViewModel
 {
-    public class HomeViewModel : ViewModelBase
+    public class RootViewModel : ViewModelBase
     {
         public override string Header { get; }
 
@@ -31,7 +34,9 @@ namespace HistoryCreator.ViewModel
             }
         }
 
-        public ObservableCollection<TabItem> OpenViewCollection { get; private set; }
+        private readonly ViewManager _viewsManager;
+
+        public ObservableCollection<IPaneView> OpenViewCollection => _viewsManager.Views;
 
         #region Application Menu Commands region
 
@@ -46,28 +51,21 @@ namespace HistoryCreator.ViewModel
 
         public DelegateCommand<object> CreateCharacterCommand { get; private set; }
 
-        #endregion
+        #endregion Projet Ribbon Commands region
 
-        public HomeViewModel()
+        public RootViewModel()
         {
+            _viewsManager = new ViewManager();
+
             InitView();
             CurrentProject = new Project();
         }
 
         private void InitView()
         {
-            OpenViewCollection = new ObservableCollection<TabItem>();
+            ViewRegister.GetInstance().Register(nameof(HomeView), typeof(HomeView));
 
-            OpenViewCollection.Add(new TabItem
-            {
-                Header = "Hello",
-                Content = "World"
-            });
-            OpenViewCollection.Add(new TabItem
-            {
-                Header = "Test 1",
-                Content = "Premier test"
-            });
+            _viewsManager.AddView("HomeView", true);
 
             InitCommands();
         }
@@ -127,11 +125,10 @@ namespace HistoryCreator.ViewModel
 
         private void HandleCreateCharacterCommand(object obj)
         {
-            OpenViewCollection.Add(new TabItem()
+            if (obj is string nameView)
             {
-                Header = "Personnage",
-                Content = "Yes ça fonctionne"
-            });
+                _viewsManager.AddView(nameView);
+            }
         }
     }
 }
