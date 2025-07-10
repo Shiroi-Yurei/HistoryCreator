@@ -22,5 +22,10 @@ namespace HistoryCreator.Ressources
         /// Nom du fichier principal d'un projet
         /// </summary>
         public static string MainFileProjectName = "project.json";
+
+        /// <summary>
+        /// Nom du fichier de configuration de l'application
+        /// </summary>
+        public static string ConfigApplicationFile = "config.json";
     }
 }

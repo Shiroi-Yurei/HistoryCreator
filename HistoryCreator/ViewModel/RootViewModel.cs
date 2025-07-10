@@ -1,12 +1,14 @@
-﻿using HistoryCreator.Models.Data.Enum;
+﻿using HistoryCreator.Models.Data.Config;
+using HistoryCreator.Models.Data.Enum;
 using HistoryCreator.Models.Data.Manager;
 using HistoryCreator.Models.Data.Project;
 using HistoryCreator.Ressources;
-using HistoryCreator.Ressources.Core;
-using HistoryCreator.Ressources.UI;
-using HistoryCreator.Ressources.UI.Layout;
-using HistoryCreator.Ressources.UI.Layout.Interfaces;
-using HistoryCreator.Ressources.UI.Manager.View;
+using HistoryCreator.Ressources.Characters.View;
+using Marliazen.Software.Core;
+using Marliazen.Software.Core.CommandsManager;
+using Marliazen.Software.Core.Enums;
+using Marliazen.Share.UI.Layout.Interfaces;
+using Marliazen.Share.UI.Manager.View;
 using HistoryCreator.Views.Dialog;
 using HistoryCreator.Views.HomeParts;
 using Microsoft.Win32;
@@ -19,9 +21,9 @@ namespace HistoryCreator.ViewModel
     {
         public override string Header { get; }
 
-        private Project _currentProject;
+        private IProject _currentProject;
 
-        public Project CurrentProject
+        public IProject CurrentProject
         {
             get => _currentProject;
             set
@@ -30,6 +32,7 @@ namespace HistoryCreator.ViewModel
                 {
                     _currentProject = value;
                     OnPropertyChanged(nameof(CurrentProject));
+                    CommandsManager.GetInstance().UpdateCommands(nameof(RootViewModel));
                 }
             }
         }
@@ -49,7 +52,10 @@ namespace HistoryCreator.ViewModel
 
         #region Projet Ribbon Commands region
 
+        #region
         public DelegateCommand<object> CreateCharacterCommand { get; private set; }
+        public DelegateCommand<object> OpenCharacterList { get; private set; }
+        #endregion
 
         #endregion Projet Ribbon Commands region
 
@@ -64,8 +70,12 @@ namespace HistoryCreator.ViewModel
         private void InitView()
         {
             ViewRegister.GetInstance().Register(nameof(HomeView), typeof(HomeView));
+            ViewRegister.GetInstance().Register(nameof(CharacterFormView), typeof(CharacterFormView));
+            ViewRegister.GetInstance().Register(nameof(CharacterListView), typeof(CharacterListView));
 
-            _viewsManager.AddView("HomeView", true);
+            _viewsManager.AddStaticView("HomeView");
+
+            var config = AppConfig.GetInstance();
 
             InitCommands();
         }
@@ -76,6 +86,12 @@ namespace HistoryCreator.ViewModel
             OpenProjectCommand = new DelegateCommand<object>(HandleOpenProjectCommand, CanHandleOpenProjectCommand);
 
             CreateCharacterCommand = new DelegateCommand<object>(HandleCreateCharacterCommand, CanHandleCreateCharacterCommand);
+            OpenCharacterList = new DelegateCommand<object>(HandleOpenCharacterListCommand, CanHandleOpenCharacterListCommand);
+
+            CommandsManager.GetInstance().Register(nameof(RootViewModel), NewProjectCommand);
+            CommandsManager.GetInstance().Register(nameof(RootViewModel), OpenProjectCommand);
+            CommandsManager.GetInstance().Register(nameof(RootViewModel), OpenCharacterList);
+            CommandsManager.GetInstance().Register(nameof(RootViewModel), CreateCharacterCommand);
         }
 
         private bool CanHandleNewProjectCommand(object? obj)
@@ -92,6 +108,10 @@ namespace HistoryCreator.ViewModel
         {
             var newProject = new NewProjectView((r, p) =>
             {
+                if (r == DialogResult.Ok)
+                {
+                    CurrentProject = p;
+                }
             });
             newProject.ShowDialog();
         }
@@ -114,13 +134,29 @@ namespace HistoryCreator.ViewModel
             {
                 var importProject = DataStorageManager.Instance.Import<Project>(storageType, projectPath);
                 if (importProject != null)
+                {
+                    importProject.IsInitialized = true;
                     CurrentProject = importProject;
+                }
             }
+        }
+
+        private bool CanHandleOpenCharacterListCommand(object obj)
+        {
+            return true; // CurrentProject.IsInitialized;
         }
 
         private bool CanHandleCreateCharacterCommand(object obj)
         {
-            return true;
+            return CurrentProject.IsInitialized;
+        }
+
+        private void HandleOpenCharacterListCommand(object obj)
+        {
+            if (obj is string nameview)
+            {
+                _viewsManager.AddView(nameview);
+            }
         }
 
         private void HandleCreateCharacterCommand(object obj)

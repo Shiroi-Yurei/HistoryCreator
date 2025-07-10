@@ -1,7 +1,7 @@
-﻿using HistoryCreator.Models.Data.Project;
-using HistoryCreator.Ressources.Core.Enums;
+﻿using System.Windows;
+using HistoryCreator.Models.Data.Project;
 using HistoryCreator.ViewModel.Dialog;
-using System.Windows;
+using Marliazen.Software.Core.Enums;
 
 namespace HistoryCreator.Views.Dialog
 {
@@ -10,7 +10,7 @@ namespace HistoryCreator.Views.Dialog
     /// </summary>
     public partial class NewProjectView : Window
     {
-        Action<DialogResult, IProject?> _closeAction;
+        private Action<DialogResult, IProject?> _closeAction;
 
         public NewProjectView(Action<DialogResult, IProject?> closeAction)
         {
@@ -27,15 +27,15 @@ namespace HistoryCreator.Views.Dialog
         private void DataContext_RequestClose(object? sender, DialogResult e)
         {
             if (sender is NewProjectViewModel viewModel)
-            { 
-                if (e == Ressources.Core.Enums.DialogResult.Cancel)
+            {
+                if (e == Marliazen.Software.Core.Enums.DialogResult.Cancel)
                 {
-                    _closeAction.Invoke(Ressources.Core.Enums.DialogResult.Cancel, null);
+                    _closeAction.Invoke(Marliazen.Software.Core.Enums.DialogResult.Cancel, null);
                     Close();
                 }
-                else if (e == Ressources.Core.Enums.DialogResult.Ok)
+                else if (e == Marliazen.Software.Core.Enums.DialogResult.Ok)
                 {
-                    _closeAction.Invoke(Ressources.Core.Enums.DialogResult.Ok, viewModel.CurrentProject);
+                    _closeAction.Invoke(Marliazen.Software.Core.Enums.DialogResult.Ok, viewModel.CurrentProject);
                     Close();
                 }
                 else

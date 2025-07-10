@@ -1,11 +1,6 @@
 ﻿using HistoryCreator.Models.Data.Enum;
-using HistoryCreator.Ressources.Core.DataManager.Entity;
-using HistoryCreator.Ressources.Core.DataManager.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Marliazen.Software.Core.DataManager.Entity;
+using Marliazen.Software.Core.DataManager.Interfaces;
 
 namespace HistoryCreator.Models.Data.Project
 {
@@ -13,6 +8,7 @@ namespace HistoryCreator.Models.Data.Project
     {
         string Name { get; }
         string Path { get; }
+        bool IsInitialized { get; set; }
         ProjectType TypeOfProject { get; }
         StorageType TypeOfStorage { get; }
     }

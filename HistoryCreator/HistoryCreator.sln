@@ -5,6 +5,10 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoryCreator", "HistoryCreator.csproj", "{2911961D-BD17-4320-A686-2B6F8E62E0ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marliazen.Software.Core", "..\Marliazen.Software.Core\Marliazen.Software.Core.csproj", "{B6D54B1B-9CA3-4B46-AF6D-67C903AD0946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marliazen.Share.UI", "..\Marliazen.Share.UI\Marliazen.Share.UI.csproj", "{7C770CFF-FC82-4F75-9D33-7A7A7DED1066}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2911961D-BD17-4320-A686-2B6F8E62E0ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2911961D-BD17-4320-A686-2B6F8E62E0ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2911961D-BD17-4320-A686-2B6F8E62E0ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D54B1B-9CA3-4B46-AF6D-67C903AD0946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D54B1B-9CA3-4B46-AF6D-67C903AD0946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D54B1B-9CA3-4B46-AF6D-67C903AD0946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D54B1B-9CA3-4B46-AF6D-67C903AD0946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C770CFF-FC82-4F75-9D33-7A7A7DED1066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C770CFF-FC82-4F75-9D33-7A7A7DED1066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C770CFF-FC82-4F75-9D33-7A7A7DED1066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C770CFF-FC82-4F75-9D33-7A7A7DED1066}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

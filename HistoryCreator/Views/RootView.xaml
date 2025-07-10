@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HistoryCreator"
-        xmlns:converter="clr-namespace:HistoryCreator.Ressources.Core.Converters" 
-        xmlns:mzLayout="clr-namespace:HistoryCreator.Ressources.UI.Layout"
+        xmlns:converter="clr-namespace:Marliazen.Share.UI.Converters;assembly=Marliazen.Share.UI" 
+        xmlns:mzLayout="clr-namespace:Marliazen.Share.UI.Layout;assembly=Marliazen.Share.UI"
         mc:Ignorable="d"
         Title="History Creator" 
         ResizeMode="CanResize"
@@ -14,10 +14,10 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Marliazen.Share.UI;component/Style/imagesdictionary.xaml" />
                 <ResourceDictionary>
                     <converter:DebugDummyConverter x:Key="DebugDummyConverter" />
                 </ResourceDictionary>
-                <ResourceDictionary Source="..\Ressources\UI\Style\ImagesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -64,7 +64,7 @@
             </Ribbon.ApplicationMenu>
 
             <!-- TODO : Mettre en place les actions rapide -->
-            <RibbonTab IsSelected="True">
+            <RibbonTab Header="Fichier" IsSelected="True">
                 <RibbonGroup>
                     <RibbonButton Width="Auto"
                                   Height="Auto"
@@ -82,8 +82,12 @@
                                       VerticalAlignment="Stretch"
                                       Label="Personnages">
                         <RibbonMenuButton.Items>
+                            <RibbonMenuItem Header="Liste"
+                                            CommandParameter="CharacterListView"
+                                            Command="{Binding OpenCharacterList}"/>
+                            
                             <RibbonMenuItem Header="Création"
-                                            CommandParameter="TestView"
+                                            CommandParameter="CharacterFormView"
                                             Command="{Binding CreateCharacterCommand}"/>
                         </RibbonMenuButton.Items>
                     </RibbonMenuButton>

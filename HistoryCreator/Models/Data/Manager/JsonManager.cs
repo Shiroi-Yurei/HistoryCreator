@@ -1,5 +1,5 @@
 ﻿using HistoryCreator.Models.Data.Manager.Interfaces;
-using HistoryCreator.Ressources.Core.DataManager.Entity;
+using Marliazen.Software.Core.DataManager.Entity;
 using Newtonsoft.Json;
 using System.IO;
 

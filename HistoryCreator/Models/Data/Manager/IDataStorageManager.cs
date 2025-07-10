@@ -1,10 +1,5 @@
 ﻿using HistoryCreator.Models.Data.Enum;
-using HistoryCreator.Ressources.Core.DataManager.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Marliazen.Software.Core.DataManager.Entity;
 
 namespace HistoryCreator.Models.Data.Manager
 {
@@ -13,7 +8,9 @@ namespace HistoryCreator.Models.Data.Manager
         public static IDataStorageManager Instance { get; }
 
         bool Export(StorageType storageType, string path, IExternalEntity obj);
+
         T? Import<T>(StorageType storage, string Path);
+
         object Import(StorageType storage, string connectionPath, string query);
     }
 }

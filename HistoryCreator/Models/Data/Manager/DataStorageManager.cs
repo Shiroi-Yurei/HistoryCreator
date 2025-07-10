@@ -1,6 +1,6 @@
 ﻿using HistoryCreator.Models.Data.Enum;
 using HistoryCreator.Models.Data.Manager.Interfaces;
-using HistoryCreator.Ressources.Core.DataManager.Entity;
+using Marliazen.Software.Core.DataManager.Entity;
 
 namespace HistoryCreator.Models.Data.Manager
 {

@@ -10,6 +10,12 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NUnit" Version="4.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Marliazen.Share.Ui\Marliazen.Share.Ui.csproj" />
+    <ProjectReference Include="..\Marliazen.Software.Core\Marliazen.Software.Core.csproj" />
   </ItemGroup>
 
 </Project>

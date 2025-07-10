@@ -5,9 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HistoryCreator.Views.Dialog"
-        xmlns:enums="clr-namespace:HistoryCreator.Models.Data.Enum"
-        xmlns:converters="clr-namespace:HistoryCreator.Ressources.Core.Converters"
-        xmlns:MzComponent="clr-namespace:HistoryCreator.Ressources.UI.Components"
+        xmlns:enums="clr-namespace:HistoryCreator.Models.Data.Enum" 
+        xmlns:MzComponent="clr-namespace:Marliazen.Share.UI.Components;assembly=Marliazen.Share.UI" 
+        xmlns:converters="clr-namespace:Marliazen.Share.UI.Converters;assembly=Marliazen.Share.UI"
         mc:Ignorable="d"
         Title="{Binding Header}" 
         SizeToContent="WidthAndHeight"
@@ -33,7 +33,7 @@
     </Window.Resources>
     <StackPanel Margin="15">
         <StackPanel.Resources>
-            <ResourceDictionary Source="..\..\Ressources\UI\Style\ComponentsStyleDictionary.xaml"/>
+            <ResourceDictionary Source="pack://application:,,,/Marliazen.Share.UI;component/Style/imagesdictionary.xaml" />
         </StackPanel.Resources>
 
         <Grid Margin="5">

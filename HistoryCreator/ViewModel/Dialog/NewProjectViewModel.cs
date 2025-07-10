@@ -1,7 +1,7 @@
 ﻿using HistoryCreator.Models.Data.Project;
 using HistoryCreator.Ressources;
-using HistoryCreator.Ressources.Core;
-using HistoryCreator.Ressources.Core.Enums;
+using Marliazen.Software.Core;
+using Marliazen.Software.Core.Enums;
 
 namespace HistoryCreator.ViewModel.Dialog
 {
@@ -49,14 +49,15 @@ namespace HistoryCreator.ViewModel.Dialog
         {
             if (CurrentProject.Save())
             {
+                CurrentProject.IsInitialized = true;
                 RequestClose.Invoke(this, DialogResult.Ok);
             }
             else
                 RequestClose.Invoke(this, DialogResult.Cancel);
         }
 
-        public void ExecuteCancelCommand(object param) { 
-            
+        public void ExecuteCancelCommand(object param) {
+            RequestClose.Invoke(this, DialogResult.Cancel);
         }
 
         public event EventHandler<DialogResult> RequestClose;

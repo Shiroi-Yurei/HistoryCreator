@@ -2,6 +2,7 @@
 using HistoryCreator.Models.Data.Manager;
 using HistoryCreator.Ressources;
 using Newtonsoft.Json;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 
@@ -17,11 +18,15 @@ namespace HistoryCreator.Models.Data.Project
         private string _name;
         private string _path;
 
+        private bool _isInitialized = false; 
+
         private ProjectType _typeOfProject;
         private StorageType _typeOfStorage;
 
         private DateTime _creationDate;
         private DateTime _modificationDate;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         [JsonProperty]
         public string Name { 
@@ -98,6 +103,11 @@ namespace HistoryCreator.Models.Data.Project
         }
 
         public string FileName => Constants.MainFileProjectName;
+
+        public bool IsInitialized { 
+            get => _isInitialized;
+            set => _isInitialized = value;
+        }
 
         public Project(string? defaultPath = null) {
             TypeOfProject = ProjectType.NotDefined;

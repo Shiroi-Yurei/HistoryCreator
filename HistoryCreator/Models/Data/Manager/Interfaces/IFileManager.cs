@@ -1,4 +1,4 @@
-﻿using HistoryCreator.Ressources.Core.DataManager.Entity;
+﻿using Marliazen.Software.Core.DataManager.Entity;
 
 namespace HistoryCreator.Models.Data.Manager.Interfaces
 {
